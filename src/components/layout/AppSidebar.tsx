@@ -1,4 +1,4 @@
-import { Home, FlaskConical, BarChart3, Wrench, Sun, ArrowUpRight } from "lucide-react";
+import { Home, FlaskConical, BarChart3, Wrench, Sun, ArrowUpRight, Beaker } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import {
   Sidebar,
@@ -27,6 +27,10 @@ const dockingSubItems = [
   { title: "LightDock", url: "/lightdock" },
   { title: "ColabDock", url: "/colabdock" },
   { title: "ParaSurf", url: "/parasurf" },
+];
+
+const solubilitySubItems = [
+  { title: "FastSolv", url: "/fastsolv", icon: Beaker },
 ];
 
 export function AppSidebar() {
@@ -71,6 +75,30 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {dockingSubItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <NavLink
+                      to={item.url}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                      activeClassName="bg-primary/10 text-primary font-medium"
+                    >
+                      <span>{item.title}</span>
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Solubility Submenu */}
+        <SidebarGroup className="mt-2">
+          <div className="px-3 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Solubility
+          </div>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {solubilitySubItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
