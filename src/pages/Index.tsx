@@ -38,7 +38,7 @@ const Index = () => {
                 <TagBadge>molecular docking</TagBadge>
                 <TagBadge>binding affinity</TagBadge>
                 <TagBadge>physics-based</TagBadge>
-                <TagBadge>drug discovery</TagBadge>
+                {/* <TagBadge>drug discovery</TagBadge> */}
               </div>
             </div>
           </header>
