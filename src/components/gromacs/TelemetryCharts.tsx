@@ -4,24 +4,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface TelemetryChartsProps {
   progress: number;
+  showResults?: boolean;
 }
 
-export function TelemetryCharts({ progress }: TelemetryChartsProps) {
+export function TelemetryCharts({ progress, showResults }: TelemetryChartsProps) {
+  // Use full data when showing results
+  const displayProgress = showResults ? 100 : progress;
   const rmsdData = useMemo(() => {
-    const points = Math.floor((progress / 100) * 50) + 1;
+    const points = Math.floor((displayProgress / 100) * 50) + 1;
     return Array.from({ length: points }, (_, i) => ({
       time: i * 2,
-      rmsd: 0.5 + Math.log(i + 1) * 0.4 + Math.random() * 0.15,
+      rmsd: 0.5 + Math.log(i + 1) * 0.4 + (showResults ? Math.sin(i * 0.3) * 0.1 : Math.random() * 0.15),
     }));
-  }, [progress]);
+  }, [displayProgress, showResults]);
 
   const energyData = useMemo(() => {
-    const points = Math.floor((progress / 100) * 50) + 1;
+    const points = Math.floor((displayProgress / 100) * 50) + 1;
     return Array.from({ length: points }, (_, i) => ({
       time: i * 2,
-      energy: -45000 - Math.log(i + 1) * 2000 + Math.random() * 500,
+      energy: -45000 - Math.log(i + 1) * 2000 + (showResults ? Math.sin(i * 0.2) * 200 : Math.random() * 500),
     }));
-  }, [progress]);
+  }, [displayProgress, showResults]);
 
   return (
     <div className="grid grid-cols-2 gap-4">

@@ -8,12 +8,18 @@ import { cn } from "@/lib/utils";
 
 interface TopologyStepProps {
   onComplete: () => void;
+  demoFile?: { name: string } | null;
+  demoForceField?: string;
 }
 
-export function TopologyStep({ onComplete }: TopologyStepProps) {
-  const [file, setFile] = useState<File | null>(null);
-  const [forceField, setForceField] = useState<string>("");
+export function TopologyStep({ onComplete, demoFile, demoForceField }: TopologyStepProps) {
+  const [file, setFile] = useState<File | { name: string } | null>(demoFile || null);
+  const [forceField, setForceField] = useState<string>(demoForceField || "");
   const [isDragOver, setIsDragOver] = useState(false);
+
+  // Sync with demo props
+  if (demoFile && !file) setFile(demoFile);
+  if (demoForceField && !forceField) setForceField(demoForceField);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
