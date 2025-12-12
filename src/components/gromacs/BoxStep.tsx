@@ -8,11 +8,13 @@ import { cn } from "@/lib/utils";
 
 interface BoxStepProps {
   onComplete: () => void;
+  demoBoxShape?: "cubic" | "dodecahedron";
+  demoAddIons?: boolean;
 }
 
-export function BoxStep({ onComplete }: BoxStepProps) {
-  const [boxShape, setBoxShape] = useState<"cubic" | "dodecahedron">("cubic");
-  const [addIons, setAddIons] = useState(true);
+export function BoxStep({ onComplete, demoBoxShape, demoAddIons }: BoxStepProps) {
+  const [boxShape, setBoxShape] = useState<"cubic" | "dodecahedron">(demoBoxShape || "cubic");
+  const [addIons, setAddIons] = useState(demoAddIons !== undefined ? demoAddIons : true);
 
   return (
     <div className="space-y-4">

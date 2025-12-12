@@ -7,10 +7,11 @@ import { Button } from "@/components/ui/button";
 
 interface RunStepProps {
   onStart: () => void;
+  demoSimulationTime?: number;
 }
 
-export function RunStep({ onStart }: RunStepProps) {
-  const [simulationTime, setSimulationTime] = useState([10]);
+export function RunStep({ onStart, demoSimulationTime }: RunStepProps) {
+  const [simulationTime, setSimulationTime] = useState([demoSimulationTime || 10]);
 
   return (
     <div className="space-y-4">
